@@ -1,0 +1,58 @@
+class Solution:
+
+    def encode(self, strs: List[str]) -> str:
+        # Combine a list of strings into a single string
+        return r'\\\\'.join(strs) if strs else "__None__"
+
+    def decode(self, s: str) -> List[str]:
+        # Decode single string back into original list
+        return [] if s == "__None__" else s.split(r'\\\\')
+
+
+# Try another approach that uses length of each string in strs
+class Solution:
+
+    def encode(self, strs: List[str]) -> str:
+        # Combine a list of strings into a single string
+        # n = # strings, m = len of longest s
+        lengths = [len(s) for s in strs] # O(n)
+        result = ''
+        if len(strs) == 0:
+            return "emptyList"
+        for length, s in zip(lengths, strs): # O(n)
+            result += f'{length}#{s}' #  space: O(n * m)
+        return result
+
+
+    def decode(self, s: str) -> List[str]:
+        # Decode single string back into original list
+        result = []
+        if s == '0#':
+            return ['']
+        if s == 'emptyList':
+            return result
+        in_word = False
+        i = 0
+        str_len = ''
+        while i < len(s):
+            if s[i].isnumeric():
+                while s[i] != '#':
+                    str_len += s[i]
+                    i += 1
+            if s[i] == '#':
+                i += 1
+                end = i + int(str_len)
+                result.append(s[i:end])
+                i = end
+                str_len = ''
+        return result
+
+                
+            
+
+
+
+
+
+
+
