@@ -1,3 +1,9 @@
+"""
+This was a really fun problem. I broke the problem down on pen and paper
+before implementing it, which was extremely satisfying. I also had an important
+lesson about not mutating objects as I iterate over them, when I attempted to 
+get clever and use list comprehension instead of while loops in pop() and peek(0).
+"""
 class MyQueue:
 
     def __init__(self):
